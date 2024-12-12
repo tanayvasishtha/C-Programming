@@ -1,0 +1,3 @@
+student name=tanay	
+student age=19	
+student cgpa:9.800000
