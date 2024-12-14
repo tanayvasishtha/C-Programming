@@ -1,0 +1,43 @@
+if (adjacencyMatrix[i][j] != 0) {
+                numEdges++;
+            }
+        }
+    }
+
+    struct Graph* graph = createGraph(numVertices, numEdges);
+
+    // Fill the edges from the adjacency matrix
+    int edgeIndex = 0;
+    for (int i = 0; i < numVertices; i++) {
+        for (int j = i + 1; j < numVertices; j++) {
+            if (adjacencyMatrix[i][j] != 0) {
+                graph->edges[edgeIndex++] = (struct Edge){i, j, adjacencyMatrix[i][j]};
+            }
+        }
+    }
+
+    fclose(inputFile);
+    return graph;
+}
+
+int main() {
+    const char* inputFileName = "inUnAdjMat.dat";
+    const char* outputFileName = "output.dat";
+
+    // Load graph from the input file
+    struct Graph* graph = loadGraphFromFile(inputFileName);
+    if (graph == NULL) {
+        return -1;
+    }
+
+    // Run Kruskal's Algorithm
+    kruskalAlgorithm(graph, outputFileName);
+
+    printf("Minimum Spanning Tree has been written to %s\n", outputFileName);
+
+    // Free memory
+    free(graph->edges);
+    free(graph);
+
+    return 0;
+}
