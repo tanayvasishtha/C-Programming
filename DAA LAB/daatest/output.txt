@@ -1,0 +1,2 @@
+8 7 5 5 4 2 1 
+ Number of comparisons: 15
